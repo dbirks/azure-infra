@@ -1,12 +1,12 @@
 {
-  "language": "typescript",
-  "app": "npx ts-node main.ts",
-  "projectId": "37913234-7571-49aa-b2ed-41da366c4fd8",
-  "sendCrashReports": "false",
-  "terraformProviders": [],
-  "terraformModules": [],
-  "context": {
-    "excludeStackIdFromLogicalIds": "true",
-    "allowSepCharsInLogicalIds": "true"
-  }
+    "language": "typescript",
+    "app": "npx ts-node main.ts",
+    "projectId": "37913234-7571-49aa-b2ed-41da366c4fd8",
+    "sendCrashReports": "false",
+    "terraformProviders": ["azurerm@~> 7.0"],
+    "terraformModules": [],
+    "context": {
+        "excludeStackIdFromLogicalIds": "true",
+        "allowSepCharsInLogicalIds": "true"
+    }
 }
