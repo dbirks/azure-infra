@@ -3,7 +3,6 @@ import { App, TerraformStack } from "cdktf";
 import { kubernetesCluster } from "@cdktf/provider-azurerm";
 import { AzurermProvider } from "@cdktf/provider-azurerm/lib/provider";
 import { KubernetesClusterNodePool } from "@cdktf/provider-azurerm/lib/kubernetes-cluster-node-pool";
-import { KubernetesClusterExtension } from "@cdktf/provider-azurerm/lib/kubernetes-cluster-extension";
 
 class MyStack extends TerraformStack {
   constructor(scope: Construct, id: string) {
@@ -34,7 +33,6 @@ class MyStack extends TerraformStack {
     new KubernetesClusterNodePool(this, "spot-node-pool", {
       name: "spot",
       kubernetesClusterId: k8sCluster.id,
-      // vmSize: "Standard_B2s",
       vmSize: "Standard_D2s_v3",
       nodeCount: 0,
       minCount: 0,
@@ -48,25 +46,8 @@ class MyStack extends TerraformStack {
       nodeTaints: ["kubernetes.azure.com/scalesetpriority=spot:NoSchedule"],
     });
 
-    new KubernetesClusterExtension(this, "k8s-extension-flux", {
-      name: "flux",
-      clusterId: k8sCluster.id,
-      extensionType: "Microsoft.Flux",
-      releaseNamespace: "flux-system",
-      configurationSettings: {
-        "gitRepository.url": "https://github.com/dbirks/personal-aks-cluster",
-        "gitRepository.repositoryRef.branch": "main",
-        "sourceKind": "GitRepository",
-
-
-        // gitBranch: "main",
-        // gitPath: "flux",
-        // operatorInstanceName: "flux",
-        // operatorNamespace: "flux-system",
-        // syncInterval: "5m",
-        // deleteCRD: "true",
-      },
-    });
+    // TODO: Configure flux automatically here when this PR is merged:
+    // https://github.com/hashicorp/terraform-provider-azurerm/issues/15011
   }
 }
 
