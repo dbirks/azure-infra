@@ -22,5 +22,5 @@ curl -LO https://app.getambassador.io/yaml/emissary/3.6.0/emissary-crds.yaml
 
 Configure your kubeconfig:
 ```
-az aks get-credentials --resource-group personal --name personal-aks-cluster
+az aks get-credentials --resource-group personal --name home
 ```

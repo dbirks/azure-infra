@@ -3,6 +3,7 @@ import { App, TerraformStack } from "cdktf";
 import { kubernetesCluster } from "@cdktf/provider-azurerm";
 import { AzurermProvider } from "@cdktf/provider-azurerm/lib/provider";
 import { KubernetesClusterNodePool } from "@cdktf/provider-azurerm/lib/kubernetes-cluster-node-pool";
+import { VirtualNetwork } from "@cdktf/provider-azurerm/lib/virtual-network";
 
 class MyStack extends TerraformStack {
   constructor(scope: Construct, id: string) {
@@ -11,6 +12,19 @@ class MyStack extends TerraformStack {
     const resourceGroupName = "personal";
 
     new AzurermProvider(this, "azurerm", { features: {} });
+
+    new VirtualNetwork(this, "vnet", {
+      name: "personal",
+      location: "eastus",
+      resourceGroupName,
+      addressSpace: ["10.10.0.0/20"],
+      subnet: [
+        {
+          name: "default",
+          addressPrefix: "10.10.0.0/23",
+        },
+      ],
+    });
 
     const k8sCluster = new kubernetesCluster.KubernetesCluster(this, "k8s", {
       name: "home",
@@ -22,7 +36,6 @@ class MyStack extends TerraformStack {
       identity: {
         type: "SystemAssigned",
       },
-
       defaultNodePool: {
         name: "default",
         nodeCount: 1,
@@ -33,9 +46,9 @@ class MyStack extends TerraformStack {
     new KubernetesClusterNodePool(this, "spot-node-pool", {
       name: "spot",
       kubernetesClusterId: k8sCluster.id,
-      vmSize: "Standard_D2s_v3",
-      nodeCount: 0,
-      minCount: 0,
+      vmSize: "Standard_B2s",
+      nodeCount: 1,
+      minCount: 1,
       maxCount: 3,
       priority: "Spot",
       evictionPolicy: "Delete",
