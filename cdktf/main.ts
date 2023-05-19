@@ -60,6 +60,8 @@ class MyStack extends TerraformStack {
       defaultNodePool: {
         name: "default",
         nodeCount: 1,
+        minCount: 1,
+        maxCount: 3,
         vmSize: "Standard_B2s",
         enableAutoScaling: true,
       },
