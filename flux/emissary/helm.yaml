@@ -18,7 +18,7 @@ spec:
   chart:
     spec:
       chart: emissary-ingress
-      version: '3.6.0'
+      version: '8.6.0'
       sourceRef:
         kind: HelmRepository
         name: datawire
