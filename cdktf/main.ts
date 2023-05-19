@@ -61,6 +61,7 @@ class MyStack extends TerraformStack {
         name: "default",
         nodeCount: 1,
         vmSize: "Standard_B2s",
+        enableAutoScaling: true,
       },
     });
   }
