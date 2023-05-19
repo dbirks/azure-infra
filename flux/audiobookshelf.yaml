@@ -20,7 +20,7 @@ spec:
               memory: "256Mi"
               cpu: "500m"
           volumeMounts:
-            - mountPath: /usr/share/audiobooks
+            - mountPath: /usr/share/audiobookshelf
               name: data
       volumes:
         - name: data
