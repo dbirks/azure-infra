@@ -1,0 +1,29 @@
+apiVersion: getambassador.io/v3alpha1
+kind: Listener
+metadata:
+  name: emissary-ingress-https-listener
+  namespace: kube-system
+spec:
+  port: 8443
+  protocol: HTTPS
+  securityModel: XFP
+  hostBinding:
+    namespace:
+      from: ALL
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: emissary-ingress
+  namespace: kube-system
+spec:
+  type: LoadBalancer
+  ports:
+    # - name: http
+    #   port: 80
+    #   targetPort: 8080
+    #   protocol: TCP
+    - name: https
+      port: 443
+      targetPort: 8443
+      protocol: TCP
