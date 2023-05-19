@@ -1,4 +1,4 @@
-# personal-aks-cluster
+# azure-infra
 
 ## Overview
 
