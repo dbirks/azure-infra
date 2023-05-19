@@ -1,0 +1,6 @@
+apiVersion: getambassador.io/v3alpha1
+kind: Host
+metadata:
+  name: birks-dev
+spec:
+  hostname: "*.birks.dev"
