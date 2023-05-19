@@ -58,3 +58,13 @@ spec:
   accessModes:
     - ReadWriteOnce
   storageClassName: default # a standard SSD
+---
+apiVersion: getambassador.io/v3alpha1
+kind: Mapping
+metadata:
+  name: audiobookshelf
+  namespace: default
+spec:
+  hostname: audiobooks.birks.dev
+  prefix: /
+  service: audiobookshelf
