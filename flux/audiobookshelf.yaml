@@ -1,0 +1,52 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: audiobookshelf
+spec:
+  selector:
+    matchLabels:
+      app: audiobookshelf
+  template:
+    metadata:
+      labels:
+        app: audiobookshelf
+    spec:
+      containers:
+        - name: audiobookshelf
+          image: ghcr.io/advplyr/audiobookshelf:latest
+          resources:
+            limits:
+              memory: "256Mi"
+              cpu: "500m"
+          volumeMounts:
+            - mountPath: /usr/share/audiobooks
+              name: audiobooks-data
+      volumes:
+        - name: audiobooks-volume
+          persistentVolumeClaim:
+            claimName: audiobooks-data
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: audiobookshelf
+spec:
+  type: ClusterIP
+  ports:
+    - port: 80
+      targetPort: 13378
+  selector:
+    app: audiobookshelf
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: audiobooks-data
+spec:
+  resources:
+    requests:
+      storage: 10Gi
+  volumeMode: Filesystem
+  accessModes:
+    - ReadWriteOnce
+  storageClassName: default # a standard SSD
