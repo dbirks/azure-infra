@@ -21,6 +21,9 @@ spec:
             - name: PORT
               value: "13378"
           resources:
+            requests:
+              memory: "256Mi"
+              cpu: "500m"
             limits:
               memory: "256Mi"
               cpu: "500m"
