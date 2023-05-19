@@ -21,11 +21,11 @@ spec:
               cpu: "500m"
           volumeMounts:
             - mountPath: /usr/share/audiobooks
-              name: audiobooks-data
+              name: data
       volumes:
-        - name: audiobooks-volume
+        - name: data
           persistentVolumeClaim:
-            claimName: audiobooks-data
+            claimName: audiobookshelf-data
 ---
 apiVersion: v1
 kind: Service
@@ -43,7 +43,7 @@ spec:
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: audiobooks-data
+  name: audiobookshelf-data
   namespace: default
 spec:
   resources:
