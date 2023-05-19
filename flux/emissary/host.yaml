@@ -2,5 +2,6 @@ apiVersion: getambassador.io/v3alpha1
 kind: Host
 metadata:
   name: birks-dev
+  namespace: kube-system
 spec:
   hostname: "*.birks.dev"
