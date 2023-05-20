@@ -54,6 +54,7 @@ class MyStack extends TerraformStack {
       resourceGroupName,
       kubernetesVersion: "1.26",
       automaticChannelUpgrade: "patch",
+      skuTier: "Free",
       identity: {
         type: "SystemAssigned",
       },
