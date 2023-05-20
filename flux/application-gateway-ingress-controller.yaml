@@ -28,3 +28,6 @@ spec:
   values:
     image:
       tag: 1.7.0
+    appgw:
+      name: home-application-gateway
+      subnetPrefix: 10.10.0.0/23
