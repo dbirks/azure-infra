@@ -30,6 +30,6 @@ spec:
       tag: 1.7.0
     appgw:
       name: home-application-gateway
-      subnetPrefix: 10.10.0.0/23
+      subnetPrefix: 10.224.0.0/16
     rbac:
       enabled: true
