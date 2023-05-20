@@ -4,6 +4,8 @@ metadata:
   name: audiobookshelf
   namespace: default
 spec:
+  strategy:
+    type: Recreate
   selector:
     matchLabels:
       app: audiobookshelf
