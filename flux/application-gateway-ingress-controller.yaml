@@ -1,0 +1,29 @@
+---
+apiVersion: source.toolkit.fluxcd.io/v1beta2
+kind: HelmRepository
+metadata:
+  name: application-gateway-ingress-controller
+  namespace: kube-system
+spec:
+  interval: 5m0s
+  url: https://appgwingress.blob.core.windows.net/ingress-azure-helm-package
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: application-gateway-ingress-controller
+  namespace: kube-system
+spec:
+  interval: 5m
+  chart:
+    spec:
+      chart: ingress-azure
+      version: "1.6.0"
+      sourceRef:
+        kind: HelmRepository
+        name: application-gateway-ingress-controller
+        namespace: kube-system
+      interval: 1m
+  values:
+    image:
+      tag: 1.7.0
