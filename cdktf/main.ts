@@ -13,7 +13,7 @@ class MyStack extends TerraformStack {
 
     new AzurermProvider(this, "azurerm", { features: {} });
 
-    new VirtualNetwork(this, "vnet", {
+    const vnet = new VirtualNetwork(this, "vnet", {
       name: "personal",
       location,
       resourceGroupName,
@@ -59,11 +59,14 @@ class MyStack extends TerraformStack {
       },
       defaultNodePool: {
         name: "default",
-        nodeCount: 1,
         minCount: 1,
         maxCount: 3,
         vmSize: "Standard_B2s",
         enableAutoScaling: true,
+      },
+      ingressApplicationGateway: {
+        gatewayName: "home application gateway",
+        subnetId: vnet.subnet.get(0).id,
       },
     });
   }
